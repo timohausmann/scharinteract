@@ -38,6 +38,11 @@ class Line {
     //Linienlaenge aktualisieren
     len += line_len_delta;
     
+    //instant kill
+    if( len <= 0 ) {
+      age = line_lifetime+1;
+    }
+    
     //Position aktualisieren
     x = x + (sin( radians(degree) ) * line_pos_delta);
     y = y - (cos( radians(degree) ) * line_pos_delta);
@@ -60,7 +65,12 @@ class Line {
      float len_x = (cos( radians(degree) ) * (len/2));
      float len_y = (sin( radians(degree) ) * (len/2));
      
-     stroke(0,0,0,alpha);
+     if( black_and_white ) {
+       stroke(0);
+     } else {
+       stroke(0,0,0,alpha);
+     }
+     
      line(x + len_x, y + len_y, x - len_x, y - len_y);
   }
   
